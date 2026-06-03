@@ -1,7 +1,8 @@
-# ProjekAlgo2_Kelompok3_O
+//ProjekAlgo2_Kelompok6_O
+
 #include <iostream>
-#include <fstream>
-#include <iomanip>
+#include <fstream> 
+#include <iomanip> 
 using namespace std;
 
 #define MAX 100
@@ -14,8 +15,8 @@ struct Data {
     int drink_amount;
     int food_amount;
 };
-
-Data menuData[MAX];  
+    
+Data data[MAX];
 int current = 0;
 
 //====================== LOGIN SYSTEM =====================
@@ -28,10 +29,10 @@ bool loginSystem(){
         cout << "===========================================" << endl;
         cout << "     welcome to our sweetmunch bakery!     " << endl;
         cout << "===========================================" << endl;
-        cout << "please enter the right username & password" << endl;
-        cout << "username masukin dulu mpruy: ";
+        cout << "please enter the right username & password" <<  endl;
+        cout << "username masukin dulu mpruy: " << endl;
         cin >> username;
-        cout << "password yang bener jangan coba-coba: ";
+        cout << "password yang bener jangan coba-coba: " << endl;
         cin >> password;
 
         if(username == "nanana3" && password == "enbesarsemua"){
@@ -39,13 +40,13 @@ bool loginSystem(){
             system("pause");
             system("cls");
             return true;
-        } else {
+        }else{
             attempts--;
-            if(attempts > 0){  
+            if(attempts > 0){ 
                 cout << "\n username sama passwordnya benerin dulu! salah itu mpruy" << endl;
-                cout << "(jiakh kesempatan loginnya tinggal:  " << attempts << " kali)" << endl;  
+                cout << "(jiakh kesempatan loginnya tinggal:  " << attempts << " kali)" << endl; 
             } else {
-                cout << "udah salah username atau password, kesempatan loginnya habis pula. gue tutup ye programnya!" << endl;
+                cout << "udah salah username atau password, kesempatan loginnya habis pula.gue tutup ye programnya!" << endl;
             }
             system("pause");
             system("cls");
@@ -61,80 +62,64 @@ void inputMenu() {
         return;
     }
     cout << "----------------------------------------" << endl;
-    cout << "                INPUT MENU              " << endl;
+    cout << "                 INPUT MENU               " << endl;
     cout << "----------------------------------------" << endl;
-    cout << "Food name: ";  cin >> ws; getline(cin, menuData[current].food_name);
-    cout << "Food price: "; cin >> menuData[current].food_price;       
-    cout << "Food stock: "; cin >> menuData[current].food_amount;
-    cout << "Drink name: "; cin >> ws; getline(cin, menuData[current].drink_name);
-    cout << "Drink price: "; cin >> menuData[current].drink_price;     
-    cout << "Drink stock: "; cin >> menuData[current].drink_amount;
+    cout << "Food name: "; cin >> ws; getline(cin, data[current].food_name);
+    cout << "Food price: "; cin >> data[current].food_price; 
+    cout << "Food stock: "; cin >> data[current].food_amount;
+    cout << "Drink name: "; cin >> ws; getline(cin, data[current].drink_name);
+    cout << "Drink price: "; cin >> data[current].drink_price; 
+    cout << "Drink stock: "; cin >> data[current].drink_amount;
     current++;
-    cout << "Data successfully added!" << endl;
+    cout << "Data seccesfully added!" << endl;
 }
 
-//================== DISPLAY MENU DATA (DIPISAH) =====================
+//================== DISPLAY MENU DATA =====================
 void displayMenu() {
     if (current == 0) {
         cout << "Belum ada data menu di etalase bakery!" << endl;
         return;
     }
-    
-    // 1. TAMPILKAN MENU MAKANAN
-    cout << "==========================================" << endl;
-    cout << "|         SWEETMUNCH FOOD MENU           |" << endl;
-    cout << "==========================================" << endl;
+    cout << "======================================================================================" << endl;
+    cout << "|                                SWEETMUNCH BAKERY MENU                               |" << endl;
+    cout << "======================================================================================" << endl;
     cout << left << setw(5) << "No"
          << setw(25) << "FOOD NAME"
-         << setw(15) << "PRICE" << endl;
-    cout << "------------------------------------------" << endl;
-    for (int i = 0; i < current; i++) {
-        cout << left << setw(5) << (i + 1)
-             << setw(25) << menuData[i].food_name
-             << "Rp" << menuData[i].food_price << endl;
-    }
-    cout << "==========================================" << endl << endl;
-
-    // 2. TAMPILKAN MENU MINUMAN
-    cout << "==========================================" << endl;
-    cout << "|        SWEETMUNCH DRINK MENU           |" << endl;
-    cout << "==========================================" << endl;
-    cout << left << setw(5) << "No"
+         << setw(15) << "PRICE"
          << setw(25) << "DRINK NAME"
          << setw(15) << "PRICE" << endl;
-    cout << "------------------------------------------" << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl;          
+    Data *ptr = data; 
     for (int i = 0; i < current; i++) {
         cout << left << setw(5) << (i + 1)
-             << setw(25) << menuData[i].drink_name
-             << "Rp" << menuData[i].drink_price << endl;
+             << setw(25) << ptr->food_name
+             << "Rp" << setw(13) << ptr->food_price
+             << setw(25) << ptr->drink_name
+             << "Rp" << setw(13) << ptr->drink_price << endl;
+        ptr++;
     }
-    cout << "==========================================" << endl;
+    cout << "======================================================================================" << endl; 
 }
 
-//============ STOCK FOOD & BEVERAGES ========
+//============ STOCK FOOD & BAVERAGES ANJAY ========
 void displayStock(){
     if(current == 0){
         cout << "belum ada data stok!" << endl;
         return;
     }
-    cout << "==========================================" << endl;
-    cout << "|    SWEETMUNCH FOOD & DRINK INVENTORY   |" << endl;
-    cout << "==========================================" << endl;
+    cout << "======================================================================================" << endl;
+    cout << "|                      SWEETMUNCH BAKERY STOCK INVENTORY                             |" << endl;
+    cout << "======================================================================================" << endl;
     cout << left << setw(5) << "No" 
-         << setw(25) << "ITEM NAME" << setw(10) << "STOCK" << endl;
-    cout << "------------------------------------------" << endl;
-    cout << "[ FOODS ]" << endl;
+         << setw(25) << "FOOD NAME" << setw(10) << "STOCK" 
+         << setw(25) << "DRINK NAME" << setw(10) << "STOCK" << endl;
+    cout << "--------------------------------------------------------------------------------------" << endl; 
     for(int i = 0; i < current; i++){
         cout << left << setw(5) << (i + 1)
-             << setw(25) << menuData[i].food_name << setw(10) << menuData[i].food_amount << endl;
+             << setw(25) << data[i].food_name << setw(10) << data[i].food_amount
+             << setw(25) << data[i].drink_name << setw(10) << data[i].drink_amount << endl;
     }
-    cout << "------------------------------------------" << endl;
-    cout << "[ DRINKS ]" << endl;
-    for(int i = 0; i < current; i++){
-        cout << left << setw(5) << (i + 1)
-             << setw(25) << menuData[i].drink_name << setw(10) << menuData[i].drink_amount << endl;
-    }
-    cout << "==========================================" << endl;
+    cout << "======================================================================================" << endl;
 }
 
 //================== EDIT DATA =====================
@@ -144,84 +129,77 @@ void editBakery() {
         return;
     }
     string target;
-    cout << "Masukkan nama makanan atau minuman yang akan diedit: ";
-    cin >> ws;
-    getline(cin, target);
+    cout << "Masukkan nama makanan yang akan diedit: ";
+    cin >> ws; 
+    getline(cin, target);   
+    Data *ptr = data;
     bool found = false;
-
+        
     for (int i = 0; i < current; i++) {
-        if (menuData[i].food_name == target || menuData[i].drink_name == target) {
-            found = true;
+        if (ptr->food_name == target) { 
+            found = true;            
             int chooseEdit;
-            cout << "\nData ditemukan! mau edit bagian apa?" << endl;
+            cout << "\nData makanan ditemukan! mau edit bagian apa?" << endl;
             cout << "1. Nama & Harga Makanan" << endl;
             cout << "2. Nama & Harga Minuman" << endl;
-            cout << "3. Update semua stok" << endl;
-            cout << "Pilihan: "; cin >> chooseEdit;
+            cout << "3. Update stok semua stok" << endl; 
+            cin >> chooseEdit;
             if(chooseEdit == 1){
-                cout << "Nama makanan baru: "; cin >> ws; getline(cin, menuData[i].food_name);
-                cout << "Harga makanan baru: "; cin >> menuData[i].food_price;
+                cout << "Nama makanan baru: "; cin >> ws; getline(cin, ptr->food_name);
+                cout << "Harga makanan baru: "; cin >> ptr->food_price;
             } else if(chooseEdit == 2){
-                cout << "Nama minuman baru: "; cin >> ws; getline(cin, menuData[i].drink_name);
-                cout << "Harga minuman baru: "; cin >> menuData[i].drink_price;
+                cout << "Nama minuman baru: "; cin >> ws; getline(cin, ptr->drink_name);
+                cout << "Harga minuman baru: "; cin >> ptr->drink_price;
             } else if(chooseEdit == 3){
-                cout << "Stok makanan baru: "; cin >> menuData[i].food_amount;
-                cout << "Stok minuman baru: "; cin >> menuData[i].drink_amount;
+                cout << "Stok makanan baru: "; cin >> ptr->food_amount;
+                cout << "Stok minuman baru: "; cin >> ptr->drink_amount;
             }
             cout << "Data bakery berhasil diperbarui!" << endl;
             break;
         }
+        ptr++;
     }
     if (!found) {
         cout << "Menu tidak ditemukan!" << endl;
     }
 }
 
-//=================== HAPUS DATA =================
+//=================== HAPUS DATA ================= 
 void deleteData(){
     if(current == 0){
         cout << "kosong ini loh, nggak ada yang bisa dihapus!" << endl;
-        return;  
-    }
+        return; 
+    }    
     string search;
-    cout << "masukin nama makanan/minuman yang mau dihapus sini: ";
-    cin >> ws; getline(cin, search);
+    cout << "masukin nama makanan yang mau dihapus sini: ";
+    cin >> ws; getline(cin, search);    
     bool found = false;
     for(int i = 0; i < current; i++){
-        if(menuData[i].food_name == search || menuData[i].drink_name == search){  
+        if(data[i].food_name == search){ 
             found = true;
             for(int j = i; j < current - 1; j++){
-                menuData[j] = menuData[j + 1];
+                data[j] = data[j + 1];
             }
-            current--;  
-            cout << "udah kehapus dari etalase" << endl;  
-            break;
+            current--; 
+            cout << "udah kehapus dari etalase" << endl; 
+            break; 
         }
     }
     if(!found) cout << "menu nggak ada woy!" << endl;
 }
 
-//================== HELPER: cetak hasil search terpisah =====================
-void cetakHasilSearch(int idx, int opsi){  
-    cout << "------------------------------------------" << endl;
-    if(opsi == 1) {
-        cout << left << setw(5) << "No" << setw(25) << "FOOD NAME" << "PRICE" << endl;
-        cout << left << setw(5) << (idx + 1) << setw(25) << menuData[idx].food_name << "Rp" << menuData[idx].food_price << endl;
-    } else {
-        cout << left << setw(5) << "No" << setw(25) << "DRINK NAME" << "PRICE" << endl;
-        cout << left << setw(5) << (idx + 1) << setw(25) << menuData[idx].drink_name << "Rp" << menuData[idx].drink_price << endl;
-    }
-    cout << "------------------------------------------" << endl;
+void cetakHasilSearch(int index) {
+    cout << "\n[DATA DITEMUKAN PADA INDEX DI- " << index << "]" << endl;
+    cout << "Makanan: " << data[index].food_name << " (Rp" << data[index].food_price << ") | Stok: " << data[index].food_amount << endl;
+    cout << "Minuman: " << data[index].drink_name << " (Rp" << data[index].drink_price << ") | Stok: " << data[index].drink_amount << endl;
 }
-
-//================== SEARCH (TERPISAH) =====================
+    
+//================== SEARCH =====================
 void binarySearch(string search, int opsi) {
-    // bubble sort dulu sesuai field sebelum binary search
     for(int i = 0; i < current - 1; i++){
-        for(int j = 0; j < current - i - 1; j++){  
-            if((opsi == 1 && menuData[j].food_name > menuData[j + 1].food_name) ||
-               (opsi == 2 && menuData[j].drink_name > menuData[j + 1].drink_name)){
-                swap(menuData[j], menuData[j + 1]);  
+        for(int j = 0; j < current - i - 1;  j++){ 
+            if((opsi == 1 && data[j].food_name > data[j + 1].food_name) || (opsi == 2 && data[j].drink_name > data[j + 1].drink_name)){
+                swap(data[j], data[j + 1]); 
             }
         }
     }
@@ -229,9 +207,9 @@ void binarySearch(string search, int opsi) {
     bool found = false;
     while (low <= high){
         mid = (low + high) / 2;
-        string current_name = (opsi == 1) ? menuData[mid].food_name : menuData[mid].drink_name;
+        string current_name = (opsi == 1) ? data[mid].food_name : data[mid].drink_name;
         if(current_name == search){
-            cetakHasilSearch(mid, opsi);
+            cetakHasilSearch(mid);
             found = true; break;
         }
         else if(current_name < search) low = mid + 1;
@@ -239,88 +217,77 @@ void binarySearch(string search, int opsi) {
     }
     if (!found) cout << "Data tidak ditemukan" << endl;
 }
-
-//========= SORTING (Shell Sort Terpisah) ==========
-void shellSort(int field) {  
-    int gap = current / 2;
-    while(gap > 0){
-        for(int i = gap; i < current; i++){
-            Data temp = menuData[i];
-            int j = i;
-            while(j >= gap && (field == 1 ? menuData[j - gap].food_name > temp.food_name
-                                          : menuData[j - gap].drink_name > temp.drink_name)){
-                menuData[j] = menuData[j - gap];
-                j -= gap;
-            }
-            menuData[j] = temp;
-        }
-        gap /= 2;
-    }
     
-    // Tampilkan hasil secara spesifik
-    cout << "==========================================" << endl;
-    if(field == 1) {
-        cout << " Data Terurut (Ascending Food Name)!" << endl;
-        cout << "==========================================" << endl;
-        cout << left << setw(5) << "No" << setw(25) << "FOOD NAME" << "PRICE" << endl;
-        for(int i=0; i<current; i++) {
-            cout << left << setw(5) << (i+1) << setw(25) << menuData[i].food_name << "Rp" << menuData[i].food_price << endl;
+//========= SORTING (Berdasarkan Ascending)==========
+void shellSort(int field) { 
+    int gap = current/2;
+    while(gap>0){
+        for(int i = gap; i<current; i++){
+            Data temp = data[i]; 
+            int j = i;
+            while(j >= gap && (field == 1 ? data[j-gap].food_name > temp.food_name 
+                                         : data[j-gap].drink_name > temp.drink_name)){ 
+                    data[j] = data[j-gap]; 
+                    j -= gap;
+                }
+                data[j]=temp; 
+            }
+            gap/=2;
         }
-    } else {
-        cout << " Data Terurut (Ascending Drink Name)!" << endl;
-        cout << "==========================================" << endl;
-        cout << left << setw(5) << "No" << setw(25) << "DRINK NAME" << "PRICE" << endl;
-        for(int i=0; i<current; i++) {
-            cout << left << setw(5) << (i+1) << setw(25) << menuData[i].drink_name << "Rp" << menuData[i].drink_price << endl;
-        }
-    }
-    cout << "==========================================" << endl;
+        if(field == 1)
+            cout << "Data diurutkan (shell sort - ascending food name)!" << endl;
+        else
+            cout << "Data diurutkan (shell sort - ascending drink name)!" << endl;
 }
 
 //===== FILE HANDLING ======
 void exportData() {
     ofstream fileOut("data_bakery.txt");
+
     if(!fileOut){
         cout << "Gagal memuat file export!" << endl;
         return;
     }
     fileOut << current << endl;
+
     for(int i = 0; i < current; i++){
-        fileOut << menuData[i].food_name  << endl << menuData[i].food_price  << endl;
-        fileOut << menuData[i].drink_name << endl << menuData[i].drink_price << endl;
-        fileOut << menuData[i].food_amount << endl << menuData[i].drink_amount << endl;
+        fileOut << data[i].food_name << endl << data[i].food_price << endl;
+        fileOut << data[i].drink_name << endl << data[i].drink_price << endl;
+        fileOut << data[i].food_amount << endl << data[i].drink_amount << endl; 
     }
-    fileOut.close();  
+
+    fileOut.close(); 
     cout << "Data berhasil diexport ke data_bakery.txt" << endl;
 }
-
+    
 void importData(){
     ifstream fileIn("data_bakery.txt");
-    if(!fileIn){  
+
+    if(!fileIn){ 
         cout << "file tidak ditemukan!" << endl;
         return;
     }
     fileIn >> current;
-    for(int i = 0; i < current; i++){  
-        fileIn >> ws; getline(fileIn, menuData[i].food_name);
-        fileIn >> menuData[i].food_price;
-        fileIn >> ws; getline(fileIn, menuData[i].drink_name);
-        fileIn >> menuData[i].drink_price;    
-        fileIn >> menuData[i].food_amount;
-        fileIn >> menuData[i].drink_amount;
+    for(int i = 0; i < current; i++){ 
+        fileIn >> ws; getline(fileIn, data[i].food_name); 
+        fileIn >> data[i].food_price; 
+        fileIn >> ws; getline(fileIn, data[i].drink_name); 
+        fileIn >> data[i].drink_price; 
+        fileIn >> data[i].food_amount;
+        fileIn >> data[i].drink_amount; 
     }
-    fileIn.close();  
+
+    fileIn.close(); 
     cout << "Data berhasil diimport! Total data : " << current << " menu." << endl;
 }
-
-//================== CASHIER SYSTEM =====================
-void cashierSystem() {
-    if (current == 0) {  
+    
+void cashierSystem(){
+   if (current == 0) {  
         cout << "Belum ada menu tersedia!" << endl;
         return;
     }
 
-    displayMenu(); // Menggunakan displayMenu terpisah yang baru
+    displayMenu(); 
 
     struct OrderItem {
         string item_name;
@@ -346,8 +313,8 @@ void cashierSystem() {
 
         int pilihItem;
         cout << "Mau pesen apa?" << endl;
-        cout << "1. Makanan: " << menuData[pilihMenu-1].food_name  << " (Rp" << menuData[pilihMenu-1].food_price  << ")" << endl;
-        cout << "2. Minuman: " << menuData[pilihMenu-1].drink_name << " (Rp" << menuData[pilihMenu-1].drink_price << ")" << endl;
+        cout << "1. Makanan: " << data[pilihMenu-1].food_name  << " (Rp" << data[pilihMenu-1].food_price  << ")" << endl; 
+        cout << "2. Minuman: " << data[pilihMenu-1].drink_name << " (Rp" << data[pilihMenu-1].drink_price << ")" << endl; 
         cout << "Pilihan: ";
         cin >> pilihItem;
 
@@ -363,23 +330,23 @@ void cashierSystem() {
         orders[orderCount].qty = qty;
 
         if (pilihItem == 1) {
-            if (qty > menuData[pilihMenu-1].food_amount) {
-                cout << "Stok tidak cukup! Stok tersedia: " << menuData[pilihMenu-1].food_amount << endl;
+            if (qty > data[pilihMenu-1].food_amount) { 
+                cout << "Stok tidak cukup! Stok tersedia: " << data[pilihMenu-1].food_amount << endl;
                 continue;
             }
-            orders[orderCount].item_name  = menuData[pilihMenu-1].food_name;
+            orders[orderCount].item_name  = data[pilihMenu-1].food_name; 
             orders[orderCount].item_type  = "food";
-            orders[orderCount].item_price = menuData[pilihMenu-1].food_price;
-            menuData[pilihMenu-1].food_amount -= qty;
+            orders[orderCount].item_price = data[pilihMenu-1].food_price; 
+            data[pilihMenu-1].food_amount -= qty; 
         } else if (pilihItem == 2) {
-            if (qty > menuData[pilihMenu-1].drink_amount) {
-                cout << "Stok tidak cukup! Stok tersedia: " << menuData[pilihMenu-1].drink_amount << endl;
+            if (qty > data[pilihMenu-1].drink_amount) { 
+                cout << "Stok tidak cukup! Stok tersedia: " << data[pilihMenu-1].drink_amount << endl;
                 continue;
             }
-            orders[orderCount].item_name  = menuData[pilihMenu-1].drink_name;
+            orders[orderCount].item_name  = data[pilihMenu-1].drink_name; 
             orders[orderCount].item_type  = "drink";
-            orders[orderCount].item_price = menuData[pilihMenu-1].drink_price;
-            menuData[pilihMenu-1].drink_amount -= qty;
+            orders[orderCount].item_price = data[pilihMenu-1].drink_price; 
+            data[pilihMenu-1].drink_amount -= qty; 
         } else {
             cout << "Pilihan tidak valid!" << endl;
             continue;
@@ -445,49 +412,53 @@ void cashierSystem() {
     cout << endl;
 }
 
+
 //=================== REKURSI ========================
 int fibonacci(int n) {
-    if (n <= 1) return n;
+    if (n <= 1) {
+        return n;
+    }
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
-
+    
 //=================== FAKTORIAL ======================
-long long faktorial(int n) {
-    if (n <= 1) return 1;
+int faktorial(int n) {
+    if (n <= 1) { 
+        return 1;
+    }
     return n * faktorial(n - 1);
 }
 
 //================= MAIN ===================
 int main() {
-
+    
     if(!loginSystem()) return 0;
 
-    int mainChoose;
-    int operationChoose;
-
+    int mainChoose; 
+    int operationChoose; 
+    
     while(true) {
         cout << "======================================================================================" << endl;
         cout << "|                      SWEETMUNCH BAKERY MAIN MENU!                                  |" << endl;
         cout << "======================================================================================" << endl;
         cout << "1. Menu Operation" << endl;
-        cout << "2. Food & Drink Stocking" << endl;
+        cout << "2. Food & Drink Stocking" << endl; 
         cout << "3. Cashier System" << endl;
         cout << "4. Rekursi" << endl;
         cout << "0. Exit" << endl;
         cout << "Input your choice: "; cin >> mainChoose;
-        system("cls");
 
         switch(mainChoose) {
-            case 1: { 
+            case 1 : {
                 cout << "==========================================" << endl;
                 cout << "             MENU DATA OPERATION          " << endl;
                 cout << "==========================================" << endl;
                 cout << "1. Input Data Menu Bakery" << endl;
-                cout << "2. Display Data Menu Bakery (Terpisah)" << endl;
+                cout << "2. Display Data Menu Bakery" << endl;
                 cout << "3. Edit Data Menu Bakery" << endl;
-                cout << "4. Delete Data Menu Bakery" << endl;
-                cout << "5. Search Data (Makanan/Minuman)" << endl;
-                cout << "6. Sorting Data (Makanan/Minuman)" << endl;
+                cout << "4. Delete Data Menu Bakery" << endl; 
+                cout << "5. Search Data" << endl;
+                cout << "6. Sorting Data" << endl;
                 cout << "7. Export dan Import Data" << endl;
                 cout << "0. Keluar" << endl;
                 cout << "============================" << endl;
@@ -495,79 +466,76 @@ int main() {
                 cin >> operationChoose;
                 system("cls");
 
-                if(operationChoose == 0) break;  
+                if(operationChoose == 0) break; 
 
                 switch(operationChoose){
                     case 1: inputMenu(); break;
                     case 2: displayMenu(); break;
                     case 3: editBakery(); break;
-                    case 4: deleteData(); break;
+                    case 4: deleteData(); break; 
                     case 5: {
-                        string keyword;
-                        int opsiCari;
-                        cout << "============================" << endl;
-                        cout << "Cari berdasarkan Kategori:  " << endl;
-                        cout << "1. Makanan                  " << endl;
-                        cout << "2. Minuman                  " << endl;
-                        cout << "============================" << endl;
-                        cout << "Masukkan pilihan (1-2): "; cin >> opsiCari;
-                        cout << "Masukkan Nama Item yang dicari: "; cin >> ws; getline(cin, keyword);
-                        binarySearch(keyword, opsiCari);  
+                        string sKey; int opsi;
+                        cout << "Cari (1. Makanan / 2. Minuman): "; cin >> opsi;
+                        cout << "Masukkan nama yang dicari: "; cin >> ws; getline(cin, sKey);
+                        binarySearch(sKey, opsi); 
                         break;
-                    }
+                    } 
                     case 6: {
-                        int fieldSort;
-                        cout << "Sort berdasarkan:\n1. Makanan (Food Name)\n2. Minuman (Drink Name)\nPilihan: ";
-                        cin >> fieldSort;
-                        shellSort(fieldSort);  
+                        int opsi;
+                        cout << "Urutkan Berdasarkan (1. Food Name / 2. Drink Name): "; cin >> opsi;
+                        shellSort(opsi); 
                         break;
                     }
-                    case 7: {
+                    case 7 : {
                         int chooseFile;
                         cout << "============================" << endl;
-                        cout << "        OPERASI FILE        " << endl;
-                        cout << "============================" << endl;
+                        cout << "        OPERASI FILE         " << endl;
+                        cout << "============================" << endl;             
                         cout << "1. Export Data" << endl;
                         cout << "2. Import Data" << endl;
                         cout << "Masukkan pilihan : ";
                         cin >> chooseFile;
-                        if (chooseFile == 1) exportData();
-                        else if (chooseFile == 2) importData();
-                        break;
+                        
+                        if (chooseFile == 1) 
+                            exportData();
+                        else if (chooseFile == 2)
+                            importData();
+                        break;  
                     }
                     default: cout << "Pilihan tidak valid!" << endl;
                 }
-                break; 
-            } 
+                break;
+            }
 
-            case 2: displayStock(); break;
-            case 3: cashierSystem(); break;
+            case 2 : displayStock(); break;
+            case 3 : cashierSystem(); break;
 
-            case 4: {
+            case 4 : 
+             {
                 int chooseRekursi, n;
                 cout << "============================" << endl;
                 cout << "            REKURSI          " << endl;
-                cout << "============================" << endl;
+                cout << "============================" << endl; 
                 cout << "1. Fibonacci" << endl;
                 cout << "2. Faktorial" << endl;
                 cout << "Masukkan pilihan : ";
                 cin >> chooseRekursi;
                 cout << "Masukkan angka : ";
                 cin >> n;
-                if (chooseRekursi == 1)
+                if (chooseRekursi == 1) {
                     cout << "Hasil fibonacci : " << fibonacci(n) << endl;
-                else if (chooseRekursi == 2)
+                }
+                else if (chooseRekursi == 2) {
                     cout << "Hasil faktorial : " << faktorial(n) << endl;
+                }
                 break;
             }
 
-            case 0:
-                cout << "Thank you for using our system ia kaka kaka!" << endl;
-                return 0;
-            default:
-                cout << "Menu tidak tersedia!" << endl;
+            case 0 : cout << "Thank you for using our system ia kaka kaka!" << endl;
+            return 0;
+            default: cout << "Menu tidak tersedia!" << endl;
         }
-
+ 
         system("pause");
         system("cls");
     }
