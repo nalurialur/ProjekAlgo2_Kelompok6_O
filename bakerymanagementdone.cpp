@@ -28,9 +28,9 @@ bool loginSystem(){
         cout << "     welcome to our sweetmunch bakery!     " << endl;
         cout << "===========================================" << endl;
         cout << "please enter the right username & password" <<  endl;
-        cout << "username masukin dulu mpruy: " << endl;
+        cout << "username masukin dulu mpruy: ";
         cin >> username;
-        cout << "password yang bener jangan coba-coba: " << endl;
+        cout << "password yang bener jangan coba-coba: ";
         cin >> password;
 
         if(username == "nanana3" && password == "enbesarsemua"){
@@ -141,6 +141,7 @@ void editBakery() {
             cout << "1. Nama & Harga Makanan" << endl;
             cout << "2. Nama & Harga Minuman" << endl;
             cout << "3. Update stok semua stok" << endl; 
+            cout << "Pilih : ";
             cin >> chooseEdit;
             if(chooseEdit == 1){
                 cout << "Nama makanan baru: "; cin >> ws; getline(cin, ptr->food_name);
@@ -429,7 +430,6 @@ int faktorial(int n) {
 
 //================= MAIN ===================
 int main() {
-    
     if(!loginSystem()) return 0;
 
     int mainChoose; 
@@ -465,7 +465,6 @@ int main() {
                 system("cls");
 
                 if(operationChoose == 0) break; 
-
                 switch(operationChoose){
                     case 1: inputMenu(); break;
                     case 2: displayMenu(); break;
@@ -482,6 +481,7 @@ int main() {
                         int opsi;
                         cout << "Urutkan Berdasarkan (1. Food Name / 2. Drink Name): "; cin >> opsi;
                         shellSort(opsi); 
+                        displayMenu();
                         break;
                     }
                     case 7 : {
@@ -529,7 +529,8 @@ int main() {
                 break;
             }
 
-            case 0 : cout << "Thank you for using our system ia kaka kaka!" << endl;
+            case 0 : 
+            cout << "Thank you for using our system ia kaka kaka!" << endl;
             return 0;
             default: cout << "Menu tidak tersedia!" << endl;
         }
